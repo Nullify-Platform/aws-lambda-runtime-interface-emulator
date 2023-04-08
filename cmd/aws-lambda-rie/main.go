@@ -45,7 +45,10 @@ func main() {
 
 	go sandbox.Create()
 
-	testAPIipport := "0.0.0.0:8080"
+	testAPIipport := os.Getenv("AWS_LAMBDA_RUNTIME_EMULATOR_API")
+	if testAPIipport == "" {
+		testAPIipport = "0.0.0.0:8080"
+	}
 	startHTTPServer(testAPIipport, sandbox)
 }
 
